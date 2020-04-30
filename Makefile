@@ -263,6 +263,8 @@ install-tools-php:
 
 	curl -Lso $(BEHAT) https://github.com/Behat/Behat/releases/download/v3.3.0/behat.phar && chmod 755 $(BEHAT)
 
+
+
 	# # Get PHPUNIT depending on current PHP installation
 	# curl -Lso $(PHPUNIT) https://phar.phpunit.de/phpunit-$(shell \
 	#  	php -r "echo version_compare(PHP_VERSION, '7.0', '<') \
@@ -428,7 +430,7 @@ theme:
 # #
 # # Cimage
 # #
-# 
+#
 # define CIMAGE_CONFIG
 # <?php
 # return [
@@ -439,7 +441,7 @@ theme:
 # ];
 # endef
 # export CIMAGE_CONFIG
-# 
+#
 # define GIT_IGNORE_FILES
 # # Ignore everything in this directory
 # *
@@ -447,7 +449,7 @@ theme:
 # !.gitignore
 # endef
 # export GIT_IGNORE_FILES
-# 
+#
 # # target: cimage-install          - Install Cimage in htdocs
 # .PHONY: cimage-install
 # cimage-install:
@@ -458,7 +460,7 @@ theme:
 # 	cp vendor/mos/cimage/webroot/img.php htdocs/cimage
 # 	cp vendor/mos/cimage/webroot/img/car.png htdocs/img/
 # 	touch htdocs/cimage/img_config.php
-# 
+#
 # # target: cimage-update           - Update Cimage to latest version.
 # .PHONY: cimage-update
 # cimage-update:
@@ -470,7 +472,7 @@ theme:
 # 	cp vendor/mos/cimage/webroot/img.php htdocs/cimage
 # 	cp vendor/mos/cimage/webroot/img/car.png htdocs/img/
 # 	touch htdocs/cimage/img_config.php
-# 
+#
 # # target: cimage-config-create    - Create configfile for Cimage.
 # .PHONY: cimage-config-create
 # cimage-config-create:
