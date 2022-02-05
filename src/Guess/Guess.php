@@ -1,5 +1,4 @@
 <?php
-
 namespace Moody\Guess;
 
 /**
@@ -24,7 +23,6 @@ class Guess
      * @param int $tries  Number of tries a guess has been made,
      *                    default 6.
      */
-
     public function __construct(int $number = -1, int $tries = 6)
     {
         $this->tries = $tries;
@@ -36,13 +34,11 @@ class Guess
 
 
 
-
     /**
      * Randomize the secret number between 1 and 100 to initiate a new game.
      *
      * @return void
      */
-
     public function random() :void
     {
         $number = rand(1, 100);
@@ -51,13 +47,11 @@ class Guess
 
 
 
-
     /**
      * Get number of tries left.
      *
      * @return int as number of tries made.
      */
-
     public function tries() :int
     {
         return $this->tries;
@@ -90,13 +84,12 @@ class Guess
      */
     public function makeGuess(int $guess) : string
     {
-
         if ($guess < 1 || $guess > 100) {
-            throw new Moody\Guess\GuessException(' This number is out of the range');
+            throw new GuessException("The given number is out of range.");
         }
         $this->tries--;
         if ($this->tries < 0) {
-            $this->tries = 0;
+            $this->tries=0;
         }
 
         if ($guess === $this->number) {

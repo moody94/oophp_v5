@@ -1,0 +1,5 @@
+version: "3"
+services:
+    dev:
+        image: anax/dev
+        volumes: [ ".:/home/anax/repo" ]
