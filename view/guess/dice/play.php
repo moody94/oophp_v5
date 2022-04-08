@@ -24,11 +24,11 @@ namespace Anax\View;
     <br>
     <br>
 
-    <?php if (is_int($app->session->get("firstPlayer"))) : ?>
-        <p>Player <?= $app->session->get("firstPlayer") ?> will start playing</p>
+    <?php if (is_int($app->session->get("player1"))) : ?>
+        <p>Player <?= $app->session->get("player1") ?> will start playing</p>
         <br>
     <?php else : ?>
-        <?= $app->session->get("firstPlayer") ?>
+        <?= $app->session->get("player1") ?>
     <?php endif; ?>
 
 

@@ -11,17 +11,17 @@ namespace Anax\View;
 
     <h3>Dice game 100</h3>
     <?php if ($app->session->get("winner") === 'No winner yet!') : ?>
-        <?php if ($app->session->get("firstPlayer") === $app->session->get("firstPlayer1")) : ?>
-            <p>Player <?= $app->session->get("firstPlayer") ?>
+        <?php if ($app->session->get("player1") === $app->session->get("firstPlayer1")) : ?>
+            <p>Player <?= $app->session->get("player1") ?>
                 Throws <?= $app->session->get("playerHand") ?>
                 and the round's score is <?= $app->session->get("playerRoundSum") ?>.
             </p>
             <p style='color:green; font-weight:bold;'>Player
-                <?= $app->session->get("firstPlayer") ?>
+                <?= $app->session->get("player1") ?>
                 can either play or save!</p>
         <?php else : ?>
             <p>Player
-                <?= $app->session->get("firstPlayer") ?>
+                <?= $app->session->get("player1") ?>
                 Throws <?= $app->session->get("playerHand") ?>
                 and the round's score is <?= $app->session->get("playerRoundSum") ?>.
             </p>

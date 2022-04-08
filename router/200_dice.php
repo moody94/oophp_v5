@@ -39,10 +39,10 @@ $app->router->post("guess/dice/start", function () use ($app) {
 
     $app->session->set("game", new Moody\Controller\Game($players, $dices));
     $game = $app->session->get("game");
-    $game->processPlayersArrays();
-    $app->session->set("playersHands", $game->getPlayersHands());
-    $app->session->set("dicesInHand", $game->dicesInHand($reset = False));
-    $app->session->set("firstPlayer", $game->firstPlayer());
+    $game->arrPlayers();
+    $app->session->set("playersHands", $game->diceBeforeThowing());
+    $app->session->set("dicesInHand", $game->dicesInHand($reset = false));
+    $app->session->set("player1", $game->player1());
 
     return $app->response->redirect("guess/dice/play");
 });
@@ -71,16 +71,16 @@ $app->router->post("guess/dice/play", function () use ($app) {
     $game = $app->session->get("game");
 
     if ($play) {
-        if($game->firstPlayer() == 'Roll again') {
-            $game->throwAgain();
-            $app->session->set("playersHands", $game->getPlayersHands());
+        if ($game->player1() == 'Roll again') {
+            $game->anotherThrow();
+            $app->session->set("playersHands", $game->diceBeforeThowing());
             $app->session->set("dicesInHand", $game->dicesInHand());
-            $app->session->set("firstPlayer", $game->firstPlayer());
+            $app->session->set("player1", $game->player1());
             return $app->response->redirect("guess/dice/play");
         } else {
-            $whoWillPlay = $app->session->get('firstPlayer');
-            $game->processPlayersArrays();
-            $game->throwAgain();
+            $whoWillPlay = $app->session->get('player1');
+            $game->arrPlayers();
+            $game->anotherThrow();
             $app->session->set("playerHand", $game->playerHand($whoWillPlay));
             $app->session->set('saveButtonVisibility', 'visible');
             $app->session->set("dicesInHand", $game->dicesInHand());
@@ -101,7 +101,7 @@ $app->router->post("guess/dice/play", function () use ($app) {
 $app->router->get("guess/dice/game", function () use ($app) {
     $app->page->add("guess/dice/game");
     $game = $app->session->get("game");
-    $app->session->set("firstPlayer1", $game->returnstartGame());
+    $app->session->set("player1", $game->returnstartGame());
 
     return $app->page->render([
         "title" => "Game",
@@ -119,11 +119,11 @@ $app->router->post("guess/dice/game", function () use ($app) {
 
     if ($playGame) {
         $game = $app->session->get("game");
-        $app->session->set("firstPlayer", $game->returnstartGame());
-        $whoWillPlay = $app->session->get('firstPlayer');
-        $game->processPlayersArrays();
-        $game->throwAgain();
-        $app->session->set("playerHand",$game->playerHand($whoWillPlay));
+        $app->session->set("player1", $game->returnstartGame());
+        $whoWillPlay = $app->session->get('player1');
+        $game->arrPlayers();
+        $game->anotherThrow();
+        $app->session->set("playerHand", $game->playerHand($whoWillPlay));
         $game->dicesInHand();
         $app->session->set("playerRoundSum", $game->playerRoundSum($whoWillPlay));
         $app->session->set("winner", $game->winner($whoWillPlay));
@@ -134,11 +134,11 @@ $app->router->post("guess/dice/game", function () use ($app) {
         return $app->response->redirect("guess/dice/init");
     } elseif ($saveHand) {
         $game = $app->session->get("game");
-        $whoWillPlay = $app->session->get('firstPlayer');
-        $game->savePlayerResults($whoWillPlay);
-        $app->session->set("total", $game->total() );
+        $whoWillPlay = $app->session->get('player1');
+        $game->res1($whoWillPlay);
+        $app->session->set("total", $game->total());
         $app->session->set("winner", $game->winner($whoWillPlay));
-        $app->session->set("playerHand",$game->playerHand($whoWillPlay));
+        $app->session->set("playerHand", $game->playerHand($whoWillPlay));
         $app->session->set('saveButtonVisibility', $game->saveButtonVisibility('save', $whoWillPlay));
         $app->session->set('playButtonVisibility', $game->playButtonVisibility());
 

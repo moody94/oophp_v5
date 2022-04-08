@@ -20,11 +20,10 @@ class Game
         }
     }
 
-    public function processPlayersArrays()
+    public function arrPlayers()
     {
         $playersNumber = count($this->players);
         for ($i = 0; $i < $playersNumber; $i++) {
-
             $diceHand = $this->players[$i];
             $diceHand->setValues();
 
@@ -40,7 +39,7 @@ class Game
         return $this->playersValues;
     }
 
-    public function throwAgain()
+    public function anotherThrow()
     {
         $playersNumber = count($this->players);
         $this->playersValues = [];
@@ -66,7 +65,7 @@ class Game
         return $this->playersValues;
     }
 
-    public function getPlayersHands()
+    public function diceBeforeThowing()
     {
         $count = sizeof($this->playersValues);
         $values = '';
@@ -87,7 +86,7 @@ class Game
         return $dicesInHand;
     }
 
-    public function firstPlayer()
+    public function player1()
     {
         $max = max($this->dicesInHand);
         $itemsInPlayerSum = count($this->dicesInHand);
@@ -108,12 +107,12 @@ class Game
         return $this->startGame;
     }
 
-    public function checkIfNumberOneIsInHand(int $player)
+    public function hand1(int $player)
     {
         if (in_array(1, $this->playersValues[$player - 1])) {
-            return True;
+            return true;
         };
-        return False;
+        return false;
     }
 
     public function playerHand(int $player)
@@ -123,7 +122,7 @@ class Game
         return $playerHandValues;
     }
 
-    public function moveToNextPlayer(int $player)
+    public function nextPlayer(int $player)
     {
         $playersAmount = count($this->players);
 
@@ -152,12 +151,12 @@ class Game
             $roundSum = 0;
         }
 
-        if ($this->checkIfNumberOneIsInHand($player) === True) {
+        if ($this->hand1($player) === true) {
             $this->sum1[$player - 1] = 0;
             $this->dicesInHand[$player - 1] = 0;
-            $this->moveToNextPlayer($player);
+            $this->nextPlayer($player);
             return $this->sum1[$player - 1];
-        } else if ($this->checkIfNumberOneIsInHand($player) === False) {
+        } else if ($this->hand1($player) === false) {
             $roundSum += $this->dicesInHand[$player - 1];
             $this->sum1[$player - 1] = $roundSum;
             if ($this->sum1) {
@@ -169,14 +168,14 @@ class Game
         }
     }
 
-    public function savePlayerResults(int $player)
+    public function res1(int $player)
     {
         if (array_key_exists($player - 1, $this->total)) {
             $this->total[$player - 1] += $this->sum1[$player - 1];
         } else {
             $this->total[$player - 1] = $this->sum1[$player - 1];
         }
-        return $this->moveToNextPlayer($player);
+        return $this->nextPlayer($player);
     }
 
     public function total()
@@ -213,12 +212,12 @@ class Game
                 $this->sum1[$player - 1] = 0;
             }
 
-            if ($this->checkIfNumberOneIsInHand($player) === True) {
+            if ($this->hand1($player) === true) {
                 return 'none';
             }
             return 'none';
         } else if ($case == 'visible') {
-            if ($this->checkIfNumberOneIsInHand($player) === True) {
+            if ($this->hand1($player) === true) {
                 return 'none';
             }
             return 'visible';

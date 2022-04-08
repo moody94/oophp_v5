@@ -7,7 +7,7 @@ Min me-sida i kursen oophp
 Detta innehåll är skrivet i markdown och du hittar innehållet i filen `content/index.md`.
 
 <!-- [FIGURE src="image/mood.jpg?w=400" class="right" caption="Bild på mig."] -->
-[FIGURE src="image/mood.jpg?w=350&h=500&crop-to-fit&area=0,20,30,20" class="right w33" caption="Bild på mig."]
+[FIGURE src="image/moody.jpg?w=350&h=500&crop-to-fit&area=0,20,30,20" class="right w33" caption="Bild ."]
 Detta är min me-sida i kursen. Denna sidan innehåller en presentation av mig själv. Underhåll denna sidan under hela kursen och uppdatera den efter hand och behov.
 
 Så, en presentation en bra början. Skriv några ord om dig själv. Jag börjar.
